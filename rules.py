@@ -3,14 +3,14 @@
 import re
 
 messages = {
-    "required": u"{0} is required",
-    "email": u"{0} is not a valid email",
-    "min": u"{0} must be more than {1} characters",
-    "mind": u"{0} must be higher than {1}",
-    "max": u"{0} must be less than {1} characters",
-    "maxd": u"{0} must be lower than {1}",
-    "between": u"{0}'s length must be between {1} and {2} characters",
-    "betweend": u"{0}'s value must be higher than {1} and lower than {2}",
+    "required": "{0} is required",
+    "email": "{0} is not a valid email",
+    "min": "{0} must be more than {1} characters",
+    "mind": "{0} must be higher than {1}",
+    "max": "{0} must be less than {1} characters",
+    "maxd": "{0} must be lower than {1}",
+    "between": "{0}'s length must be between {1} and {2} characters",
+    "betweend": "{0}'s value must be higher than {1} and lower than {2}",
 }
 
 def is_number(s):
@@ -25,21 +25,20 @@ def required(value):
 
 def email(value):
     pattern = "^[a-z0-9]+([._-][a-z0-9]+)*@([a-z0-9]+([._-][a-z0-9]+))+$"
-    if not re.match(pattern, value.strip()):
-        return False
+    return re.match(pattern, str(value).strip()) is not None
 
-    return True
 
 ### min, validates if a string size is higher than the max constraint ###
 ### min, validates if a numerical value is higher than the min constraint ###
 def min(value, constraint = None):
 
-    try:
-        constraint = float(constraint)
-    except ValueError:
-        raise ValueError('constraint is missing')
-    except TypeError:
-        raise TypeError('constraint is not a valid integer')
+    if not constraint:
+        raise ValueError('constraints are missing from the validation rule')
+
+    if not is_number(constraint):
+        raise ValueError('constraint is not a valid integer')
+
+    constraint = float(constraint)
     
     if is_number(value):
         return float(value) >= constraint
@@ -50,12 +49,13 @@ def min(value, constraint = None):
 ### max, validates if a numerical value is lower than the max constraint ###
 def max(value, constraint = None):
 
-    try:
-        constraint = float(constraint)
-    except ValueError:
-        raise ValueError('constraint is missing')
-    except TypeError:
-        raise TypeError('constraint is not a valid integer')
+    if not constraint:
+        raise ValueError('constraints are missing from the validation rule')
+
+    if not is_number(constraint):
+        raise ValueError('constraint is not a valid integer')
+
+    constraint = float(constraint)
     
     if is_number(value):
         return float(value) <= constraint
@@ -65,6 +65,7 @@ def max(value, constraint = None):
 ### between, validates if a string size is between 2 length ###
 ### between, validates if a numerical value is between 2 values ###
 def between(value, constraint = None):
+
     if not constraint:
         raise ValueError('constraints are missing from the validation rule')
 

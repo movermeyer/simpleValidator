@@ -7,117 +7,170 @@ class ValidatorTest(unittest.TestCase):
     def setUp(self):
         pass
 
-    def test_validationRequired(self):
+    def test_required_empty(self):
         v = Validator(fields = {'test': ''}, rules = {'test': 'required'})
 
-        assert v.fails() == True
-        assert b'test is required' in v.errors()
+        self.assertTrue(v.fails())
+        self.assertTrue('test is required' in v.errors())
 
+    def test_required_pass(self):
         v = Validator(fields = {'test': 'myvalue'}, rules = {'test': 'required'})
 
-        assert v.fails() == False
-        assert not v.errors()
+        self.assertFalse(v.fails())
+        self.assertFalse(v.errors())
 
-    def test_validationEmail(self):
+
+
+    def test_email_malformed(self):
         v = Validator(fields = {'test': 'fake.email.com'}, rules = {'test': 'email'})
 
-        assert v.fails() == True
-        assert b'test is not a valid email' in v.errors()
+        self.assertTrue(v.fails())
+        self.assertTrue('test is not a valid email' in v.errors())
 
+    def test_email_pass(self):
         v = Validator(fields = {'test': 'fake@email.com'}, rules = {'test': 'email'})
 
-        assert v.fails() == False
-        assert not v.errors()
+        self.assertFalse(v.fails())
+        self.assertFalse(v.errors())
 
-    def test_validationMin(self):
+
+
+    def test_min_malformed(self):
+        v = Validator()
+
         try:
-            v = Validator(fields = {'test': '5char'}, rules = {'test': 'min'})
+            v.make(fields = {'test': '5char'}, rules = {'test': 'min'})
         except ValueError as e:
-            assert b'constraint is missing' in e
-        except TypeError as e:
-            assert b'constraint is not a valid integer' in e
+            self.assertRaisesRegexp(e, 'constraints are missing from the validation rule')
 
+    def test_min_malformed_non_integer(self):
+        v = Validator()
+
+        try:
+            v.make(fields = {'test': '5char'}, rules = {'test': 'min:omagad'})
+        except ValueError as e:
+            self.assertRaisesRegexp(e, 'constraint is not a valid integer')
+        
+    def test_min_string_fail(self):
         v = Validator(fields = {'test': '5char'}, rules = {'test': 'min:6'})
 
-        assert v.fails() == True
-        assert b'test must be more than 6 characters' in v.errors()
+        self.assertTrue(v.fails())
+        self.assertTrue('test must be more than 6 characters' in v.errors())
 
+    def test_min_integer_fail(self):
         v = Validator(fields = {'test': 5}, rules = {'test': 'min:6'})
 
-        assert v.fails() == True
-        assert b'test must be higher than 6' in v.errors()
+        self.assertTrue(v.fails())
+        self.assertTrue('test must be higher than 6' in v.errors())
 
+    def test_min_string_integer_pass(self):
         v = Validator(fields = {'test': '7'}, rules = {'test': 'min:6'})
 
-        assert v.fails() == False
-        assert not v.errors()
+        self.assertFalse(v.fails())
+        self.assertFalse(v.errors())
 
 
-    def test_validationMax(self):
+
+    def test_max_malformed(self):
+        v = Validator()
+
         try:
-            v = Validator(fields = {'test': '5char'}, rules = {'test': 'max'})
+            v.make(fields = {'test': '5char'}, rules = {'test': 'max'})
         except ValueError as e:
-            assert b'constraint is missing' in e
-        except TypeError as e:
-            assert b'constraint is not a valid integer' in e
+            self.assertRaisesRegexp(e, 'constraints are missing from the validation rule')
 
+    def test_max_malformed_non_integer(self):
+        v = Validator()
+
+        try:
+            v.make(fields = {'test': '5char'}, rules = {'test': 'max:omagad'})
+        except ValueError as e:
+            self.assertRaisesRegexp(e, 'constraint is not a valid integer')
+        
+    def test_max_string_fail(self):
         v = Validator(fields = {'test': '7charss'}, rules = {'test': 'max:6'})
 
-        assert v.fails() == True
-        assert b'test must be less than 6 characters' in v.errors()
+        self.assertTrue(v.fails())
+        self.assertTrue('test must be less than 6 characters' in v.errors())
 
+    def test_max_integer_fail(self):
         v = Validator(fields = {'test': 5}, rules = {'test': 'max:4'})
 
-        assert v.fails() == True
-        assert b'test must be lower than 4' in v.errors()
+        self.assertTrue(v.fails())
+        self.assertTrue('test must be lower than 4' in v.errors())
 
-        v = Validator(fields =  {'test': '7'}, rules = {'test': 'max:8'})
+    def test_max_string_integer_pass(self):
+        v = Validator(fields = {'test': '7'}, rules = {'test': 'max:8'})
 
-        assert v.fails() == False
-        assert not v.errors()
+        self.assertFalse(v.fails())
+        self.assertFalse(v.errors())
 
-    def test_validationBetween(self):
+
+
+
+
+    def test_between_malformed(self):
+        v = Validator()
+
         try:
-            v = Validator(fields = {'test': '5char'}, rules = {'test': 'between'})
+            v.make(fields = {'test': '5char'}, rules = {'test': 'between'})
         except ValueError as e:
-            assert b'constraints are missing from the validation rule' in e
-        except TypeError as e:
-            assert b'constraint is not a valid integer' in e
+            self.assertRaisesRegexp(e, 'constraints are missing from the validation rule')
 
+    def test_between_malformed_non_integer(self):
+        v = Validator()
+
+        try:
+            v.make(fields = {'test': '5char'}, rules = {'test': 'between:omagad,omagaaaad'})
+        except ValueError as e:
+            self.assertRaisesRegexp(e, 'constraint is not a valid integer')
+        
+    def test_between_string_fail(self):
         v = Validator(fields = {'test': '7charss'}, rules = {'test': 'between:8,10'})
 
-        assert v.fails() == True
-        assert b'test\'s length must be between 8 and 10 characters' in v.errors()
+        self.assertTrue(v.fails())
+        self.assertTrue('test\'s length must be between 8 and 10 characters' in v.errors())
 
+    def test_between_integer_fail(self):
         v = Validator(fields = {'test': 5}, rules = {'test': 'between:8,10'})
 
-        assert v.fails() == True
-        assert b'test\'s value must be higher than 8 and lower than 10' in v.errors()
+        self.assertTrue(v.fails())
+        self.assertTrue('test\'s value must be higher than 8 and lower than 10' in v.errors())
 
+    def test_between_string_integer_pass(self):
         v = Validator(fields = {'test': '9'}, rules = {'test': 'between:8,10'})
 
-        assert v.fails() == False
-        assert not v.errors()
+        self.assertFalse(v.fails())
+        self.assertFalse(v.errors())
 
-    def test_validationMultiple(self):
+
+
+
+    def test_multiple_rule_fail1(self):
         v = Validator(fields = {'test': ''}, rules = {'test': 'required|email'})
 
-        assert v.fails() == True
-        assert b'test is required' in v.errors()
-        assert b'test is not a valid email' in v.errors()
+        self.assertTrue(v.fails())
+        self.assertTrue('test is required' in v.errors())
+        self.assertTrue('test is not a valid email' in v.errors())
 
+    def test_multiple_rule_fail2(self):
         v = Validator(fields = {'test': 'myvalue'}, rules = {'test': 'required|email'})
 
-        assert v.fails() == True
-        assert b'test is required' not in v.errors()
-        assert b'test is not a valid email' in v.errors()
+        self.assertTrue(v.fails())
+        self.assertTrue('test is required' not in v.errors())
+        self.assertTrue('test is not a valid email' in v.errors())
 
+    def test_multiple_rule_pass(self):
         v = Validator(fields = {'test': 'fake@email.com'}, rules = {'test': 'required|email'})
 
-        assert v.fails() == False
-        assert not v.errors()
+        self.assertFalse(v.fails())
+        self.assertFalse(v.errors())
 
-    def test_validationMultiple2(self):
+
+
+
+
+    def test_multile_fields_rule_fail(self):
         v = Validator()
 
         to_test = {
@@ -132,8 +185,11 @@ class ValidatorTest(unittest.TestCase):
 
         v.make(fields = to_test, rules = rules)
 
-        assert v.fails() == True
-        assert b'email is not a valid email' in v.errors()
+        self.assertTrue(v.fails())
+        self.assertTrue('email is not a valid email' in v.errors())
+
+    def test_multile_fields_rule_pass(self):
+        v = Validator()
 
         to_test = {
             'name': 'Ken',
@@ -147,22 +203,25 @@ class ValidatorTest(unittest.TestCase):
 
         v.make(fields = to_test, rules = rules)
 
-        assert v.fails() == False
-        assert not v.errors()
+        self.assertFalse(v.fails())
+        self.assertFalse(v.errors())
 
 
-    def test_customValidation(self):
+
+
+
+    def test_custom_rule_fail(self):
         v = Validator()
         v.extend({'myrule': self.customRule})
 
         v.make(fields = {'test': 5}, rules = {'test': 'myrule'}, messages = {'myruled' : '{0} is not equal to 1'})
 
-        assert v.fails() == True
-        assert b'test is not equal to 1' in v.errors()
+        self.assertTrue(v.fails())
+        self.assertTrue('test is not equal to 1' in v.errors())
 
 
-    def customRule(self, **kwargs):
-        return kwargs['value'] == 1
+    def customRule(self, value):
+        return value == 1
 
 if __name__ == '__main__':
     unittest.main()
