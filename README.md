@@ -43,7 +43,7 @@ v.fails()
 ### returns a list of error messages
 v.errors() 
 
-### returns the list of failed validation only (no error messaged)
+### returns the list of failed validation only (no error message)
 v.failed() 
 ```
 
