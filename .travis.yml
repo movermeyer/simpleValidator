@@ -7,5 +7,6 @@ python:
 #  - "pip install ."
 #  - "pip install -r requirements.txt"
 # command to run tests
-script: python rules_tests.py
-script: python validator_tests.py
+script:
+  - python rules_tests.py
+  - python validator_tests.py
