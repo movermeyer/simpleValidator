@@ -69,7 +69,7 @@ my_validation_messages = {
     'mycustomrule': '{0} is not equal to 1 !'
 }
 
-def mycustomrule(**kwarks):
+def mycustomrule(**kwargs):
     return kwargs['value'] == 1
 
 v = Validator()
