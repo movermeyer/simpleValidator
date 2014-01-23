@@ -101,7 +101,8 @@ class Validator:
 
     def verify_fields(self):
 
-        """ As rules can be optional (ie not explicitely enforced)
+        """ 
+            As rules can be optional (ie not explicitely enforced)
             We check that the rules exist in the field dict 
         """
         for rule in self.rules:
