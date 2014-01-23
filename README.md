@@ -33,13 +33,16 @@ my_validation_rules = {
 }
 
 v = Validator()
-v.make(my_items_to_test, my_validation_rules)
+v.make(fields = my_items_to_test, rules = my_validation_rules)
 
 ### alternatively from the class constructor :
-v = Validator(my_items_to_test, my_validation_rules)
+v = Validator(fields = my_items_to_test, rules = my_validation_rules)
 
 ### returns True if the validation failed, False if passed
-v.fails() 
+if v.fails():
+    # do something
+else: 
+    # do something else
 
 ### returns a list of error messages
 v.errors() 
@@ -70,18 +73,18 @@ my_validation_messages = {
     'mycustomrule': '{0} is not equal to 1 !'
 }
 
-def mycustomrule(**kwargs):
-    return kwargs['value'] == 1
+def mycustomrule(value):
+    return value == 1
 
 v = Validator()
 v.extend({'mycustomrule': mycustomrule})
 
-v.make(my_items_to_test, my_validation_rules, my_validation_messages)
+v.make(fields = my_items_to_test, rules = my_validation_rules, messages = my_validation_messages)
 
-v.fails()
+print v.fails()
 ### outputs True
 
-v.errors()
+print v.errors()
 ### outputs [name is not equal to 1 !]
 
 ```
