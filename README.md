@@ -4,7 +4,7 @@ simpleValidator
 [![Build Status](https://travis-ci.org/kyosuken/simpleValidator.png?branch=master)](https://travis-ci.org/kyosuken/simpleValidator)
 
 
-A small, extensible python 2 library to deal with web validations !
+A small, extensible python 2 (and 3 compatible !) library to deal with web validations !
 
 simpleValidator (or just Validator actually), comes from the need of having a simple and straightforward validation library in python.
 
