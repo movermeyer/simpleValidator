@@ -81,11 +81,11 @@ v.extend({'mycustomrule': mycustomrule})
 
 v.make(fields = my_items_to_test, rules = my_validation_rules, messages = my_validation_messages)
 
-print v.fails()
+print(v.fails())
 ### outputs True
 
-print v.errors()
-### outputs [name is not equal to 1 !]
+print(v.errors())
+### outputs ['name is not equal to 1 !'']
 
 ```
 
