@@ -111,6 +111,39 @@ class ValidatorTest(unittest.TestCase):
         assert v.fails() == False
         assert not v.errors()
 
+    def test_validationMultiple2(self):
+        v = Validator()
+
+        to_test = {
+            'name': 'Ken',
+            'email': 'ken.fake-email.com',
+        }
+
+        rules = {
+            'name': 'required',
+            'email': 'required|email',
+        }
+
+        v.make(to_test, rules)
+
+        assert v.fails() == True
+        assert b'email is not a valid email' in v.errors()
+
+        to_test = {
+            'name': 'Ken',
+            'email': 'ken@fake-email.com',
+        }
+
+        rules = {
+            'name': 'required',
+            'email': 'required|email',
+        }
+
+        v.make(to_test, rules)
+
+        assert v.fails() == False
+        assert not v.errors()
+
 
     def test_customValidation(self):
         v = Validator()
