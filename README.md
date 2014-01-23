@@ -66,7 +66,7 @@ my_validation_rules = {
 }
 
 my_validation_messages = {
-    'mycustomrule' = '{0} is not equal to 1 !'
+    'mycustomrule': '{0} is not equal to 1 !'
 }
 
 def mycustomrule(**kwarks):
