@@ -1,14 +1,16 @@
 simpleValidator
 ===============
 
-A small, extensible python 2 library to deal with web validations !
+[![Build Status](https://travis-ci.org/kyosuken/simpleValidator.png?branch=master)](https://travis-ci.org/kyosuken/simpleValidator)
 
+
+A small, extensible python 2 library to deal with web validations !
 
 simpleValidator (or just Validator actually), comes from the need of having a simple and straightforward validation library in python.
 
-Sure some heavy players already exists, like WTForm, but take it as both a challenge and having somefun :)
+Sure some heavy players already exists, like WTForm, but take it as both a challenge and having somefun :), it is also inspired by the simplicity of [Laravel](https://github.com/laravel/laravel)'s own validator class
 
-The library is standalone, rules are built the python way (not class based) and easy to implement, the library is extensible as well !
+The library is standalone, rules are built the python way, in a module and easy to implement, the library is extensible as well !
 
 Where to use it ? in [Flask](https://github.com/mitsuhiko/flask) for example for people who need very simple validations
 
