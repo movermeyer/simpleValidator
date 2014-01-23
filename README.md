@@ -1,7 +1,7 @@
 simpleValidator
 ===============
 
-A small, extensible python library to deal with web validations !
+A small, extensible python 2 library to deal with web validations !
 
 
 simpleValidator (or just Validator actually), comes from the need of having a simple and straightforward validation library in python.
@@ -89,4 +89,10 @@ To Do
 -----
 
     - Add more validation rules ! (ip, size, validurl, etc, etc)
+    - Make more tests as needed !
     - Make the code less ugly in some parts ? 
+
+Is it UnitTested ?
+------------------
+
+Of course ! please check rules_tests.py and validator_tests.py for tests examples. Simply run them with python rules_tests.py or python validator_tests.py
