@@ -34,7 +34,6 @@ v = Validator()
 v.make(my_items_to_test, my_validation_rules)
 
 ### alternatively from the class constructor :
-
 v = Validator(my_items_to_test, my_validation_rules)
 
 ### returns True if the validation failed, False if passed
@@ -78,10 +77,10 @@ v.extend({'mycustomrule': mycustomrule})
 v.make(my_items_to_test, my_validation_rules, my_validation_messages)
 
 v.fails()
-### True
+### outputs True
 
 v.errors()
-### [name is not equal to 1 !]
+### outputs [name is not equal to 1 !]
 
 ```
 
