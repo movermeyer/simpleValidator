@@ -20,25 +20,26 @@ def is_number(s):
     except ValueError:
         return False
 
-def required(**kwargs):
-    return not len(str(kwargs['value']).strip()) == 0
+def required(value):
+    return not len(str(value).strip()) == 0
 
-def email(**kwargs):
+def email(value):
     pattern = "^[a-z0-9]+([._-][a-z0-9]+)*@([a-z0-9]+([._-][a-z0-9]+))+$"
-    if not re.match(pattern, kwargs['value'].strip()):
+    if not re.match(pattern, value.strip()):
         return False
 
     return True
 
 ### min, validates if a string size is higher than the max constraint ###
 ### min, validates if a numerical value is higher than the min constraint ###
-def min(**kwargs):
-    value = kwargs['value']
-    
+def min(value, constraint = None):
+
     try:
-        constraint = float(kwargs.get('constraint', ''))
+        constraint = float(constraint)
     except ValueError:
         raise ValueError('constraint is missing')
+    except TypeError:
+        raise TypeError('constraint is not a valid integer')
     
     if is_number(value):
         return float(value) >= constraint
@@ -47,13 +48,14 @@ def min(**kwargs):
 
 ### max, validates if a string size is lower than the max constraint ###
 ### max, validates if a numerical value is lower than the max constraint ###
-def max(**kwargs):
-    value = kwargs['value']
+def max(value, constraint = None):
 
     try:
-        constraint = float(kwargs.get('constraint', ''))
+        constraint = float(constraint)
     except ValueError:
         raise ValueError('constraint is missing')
+    except TypeError:
+        raise TypeError('constraint is not a valid integer')
     
     if is_number(value):
         return float(value) <= constraint
@@ -62,9 +64,14 @@ def max(**kwargs):
 
 ### between, validates if a string size is between 2 length ###
 ### between, validates if a numerical value is between 2 values ###
-def between(**kwargs):
-    value = kwargs['value']
-    constraints = kwargs.get('constraint', '').split(',')
+def between(value, constraint = None):
+    if not constraint:
+        raise ValueError('constraints are missing from the validation rule')
+
+    try:
+        constraints = constraint.split(',')
+    except TypeError:
+        raise TypeError('constraints are not a valid integer')
 
     if len(constraints) < 2:
         raise ValueError('constraints are missing from the validation rule')

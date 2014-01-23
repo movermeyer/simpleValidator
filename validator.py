@@ -5,19 +5,24 @@
 import rules as rulefactory
 
 class Validator:
-    """ messages are optional, for i18n and whatever """
-    error_messages = []
-    error_rules = []
 
-    def __init__(self, fields = None, rules = None, messages = None):
+    def __init__(self, **kwargs):
         
         self.rulefactory = rulefactory
 
-        if fields and rules:
-            self.make(fields, rules, messages)
+        """ messages are optional, for i18n and whatever """
+        self.error_messages = []
+        self.error_rules = []
+
+        if 'fields' in kwargs and 'rules' in kwargs:
+            self.make(fields = kwargs.get('fields'), rules = kwargs.get('rules'), messages = kwargs.get('messages'))
 
         
-    def make(self, fields, rules, messages = None):
+    def make(self, **kwargs):
+
+        fields = kwargs.get('fields')
+        rules = kwargs.get('rules')
+        messages = kwargs.get('messages')
 
         if not isinstance(fields, dict):
             raise ValueError('field data must be a dict')
@@ -31,7 +36,7 @@ class Validator:
         self.fields = fields
         self.rules = rules 
 
-        if messages is not None:
+        if messages:
             self.rulefactory.messages.update(messages)
 
         """ Routine to makesure that fields and rules and messages are consistent """
@@ -46,14 +51,16 @@ class Validator:
         for rule in customrule:
             setattr(self.rulefactory, rule, customrule[rule])
 
-    def __call_rule(self, **kwargs):
-        return getattr(self.rulefactory, kwargs['rule'])(**kwargs)
+    def __call_rule(self, rule, **kwargs):
+        return getattr(self.rulefactory, rule)(**kwargs)
 
     def validate(self):
         errors = []
         failed_rules = []
         
-        for field, rules in self.rules.iteritems():
+        for field in self.rules:
+            ### Not elegant, but allows full compat py2/py3 :D
+            rules = self.rules[field]
             rulelist = rules.split('|')
         
             for rule in rulelist:
