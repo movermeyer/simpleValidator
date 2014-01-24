@@ -25,7 +25,7 @@ class ValidatorTest(unittest.TestCase):
         v = Validator(fields = {'test': 'fake.email.com'}, rules = {'test': 'email'})
 
         self.assertTrue(v.fails())
-        self.assertTrue('test is not a valid email' in v.errors())
+        self.assertTrue('test must be a valid email' in v.errors())
 
     def test_email_pass(self):
         v = Validator(fields = {'test': 'fake@email.com'}, rules = {'test': 'email'})
@@ -151,14 +151,14 @@ class ValidatorTest(unittest.TestCase):
 
         self.assertTrue(v.fails())
         self.assertTrue('test is required' in v.errors())
-        self.assertTrue('test is not a valid email' in v.errors())
+        self.assertTrue('test must be a valid email' in v.errors())
 
     def test_multiple_rule_fail2(self):
         v = Validator(fields = {'test': 'myvalue'}, rules = {'test': 'required|email'})
 
         self.assertTrue(v.fails())
         self.assertTrue('test is required' not in v.errors())
-        self.assertTrue('test is not a valid email' in v.errors())
+        self.assertTrue('test must be a valid email' in v.errors())
 
     def test_multiple_rule_pass(self):
         v = Validator(fields = {'test': 'fake@email.com'}, rules = {'test': 'required|email'})
@@ -186,7 +186,9 @@ class ValidatorTest(unittest.TestCase):
         v.make(fields = to_test, rules = rules)
 
         self.assertTrue(v.fails())
-        self.assertTrue('email is not a valid email' in v.errors())
+        self.assertTrue('email must be a valid email' in v.errors())
+
+
 
     def test_multile_fields_rule_pass(self):
         v = Validator()
@@ -209,7 +211,6 @@ class ValidatorTest(unittest.TestCase):
 
 
 
-
     def test_custom_rule_fail(self):
         v = Validator()
         v.extend({'myrule': self.customRule})
@@ -222,6 +223,44 @@ class ValidatorTest(unittest.TestCase):
 
     def customRule(self, value):
         return value == 1
+
+
+
+
+
+    def test_date_rule_fail(self):
+        v = Validator(fields = {'test': '2451-df-1234'}, rules = {'test': 'date:%Y-%m-%d'})
+
+        self.assertTrue(v.fails())
+        self.assertTrue('test is not a valid date, the format must be %Y-%m-%d' in v.errors())
+
+    def test_date_rule_pass(self):
+        v = Validator(fields = {'test': '2451-09-12'}, rules = {'test': 'date:%Y-%m-%d'})
+
+        self.assertFalse(v.fails())
+        self.assertFalse(v.errors())
+
+
+    
+    def test_integer_as_string_fail(self):
+        v = Validator(fields = {'test': '-10a'}, rules = {'test': 'integer'})
+
+        self.assertTrue(v.fails())
+        self.assertTrue("test must be an integer" in v.errors())
+
+    def test_integer_as_string_pass(self):
+        v = Validator(fields = {'test': '-10'}, rules = {'test': 'integer'})
+
+        self.assertFalse(v.fails())
+        self.assertFalse(v.errors())
+
+    
+    def test_integer_as_integer_pass(self):
+        v = Validator(fields = {'test': 25}, rules = {'test': 'integer'})
+
+        self.assertFalse(v.fails())
+        self.assertFalse(v.errors())
+
 
 if __name__ == '__main__':
     unittest.main()
