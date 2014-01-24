@@ -89,12 +89,41 @@ print(v.errors())
 
 ```
 
+
+Rules List
+==========
+
+    * required, field to validate must contain a value
+    * email, field must be a valid email
+    * alpha, field must contain alphabetical characters only
+    * alpha_num, field must contain alphabetical characters and/or numbers
+    * alpha_dash, field must contain alphabetical characters, numbers, dashes and underscores
+    * numeric, field must contain a numerical value
+    * integer, field must be an integer only
+    * posinteger, field must be a positive integer only
+    * min, depending on value:
+        - string, size must be at least of min value (ex min = 5, "mystring" is valid)
+        - numerical, value must be at least higher or equal to min value (ex min = 22, 39 is valid)
+    * max, depending on value:
+        - string, size must at most be of max value (ex max = 10, "hello world" is NOT valid)
+        - numerical, value must be lower or equal than max value (ext max = 10, 12 is NOT valid)
+    * between, depending on value:
+        - string, size must be between the boundary values (ex between = (5,10), "hello !" is valid)
+        - numerical, value must be between the 2 values 
+    * ip4, value must be a valid ipv4 address
+    * ip6, value must be a valid ipv6 address
+    * date, value must be a valid date, corresponding to a specific template
+    * url, value must be a valid url (https, and port are allowed)
+
+
 To Do
 -----
 
     - Add more validation rules ! (ip, size, validurl, etc, etc)
     - Make more tests as needed !
-    - Make the code less ugly in some parts ? 
+
+
+
 
 Is it UnitTested ?
 ------------------
