@@ -101,19 +101,19 @@ Rules List
     * numeric, field must contain a numerical value
     * integer, field must be an integer only
     * posinteger, field must be a positive integer only
-    * min, depending on value:
+    * min, depending on field:
         - string, size must be at least of min value (ex min = 5, "mystring" is valid)
         - numerical, value must be at least higher or equal to min value (ex min = 22, 39 is valid)
-    * max, depending on value:
+    * max, depending on field:
         - string, size must at most be of max value (ex max = 10, "hello world" is NOT valid)
         - numerical, value must be lower or equal than max value (ext max = 10, 12 is NOT valid)
     * between, depending on value:
         - string, size must be between the boundary values (ex between = (5,10), "hello !" is valid)
         - numerical, value must be between the 2 values 
-    * ip4, value must be a valid ipv4 address
-    * ip6, value must be a valid ipv6 address
-    * date, value must be a valid date, corresponding to a specific template
-    * url, value must be a valid url (https, and port are allowed)
+    * ip4, field must be a valid ipv4 address
+    * ip6, field must be a valid ipv6 address
+    * date, field must be a valid date, corresponding to a specific template
+    * url, field must be a valid url (https, and port are allowed)
 
 
 To Do
