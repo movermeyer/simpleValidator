@@ -119,8 +119,9 @@ Rules List
 To Do
 -----
 
-    - Add more validation rules ! (ip, size, validurl, etc, etc)
+    - Add more validation rules ! (list to be decided !)
     - Make more tests as needed !
+    - Add support for i18n \o/
 
 
 
