@@ -85,7 +85,7 @@ print(v.fails())
 ### outputs True
 
 print(v.errors())
-### outputs ['name is not equal to 1 !'']
+### outputs ['name is not equal to 1 !']
 
 ```
 
@@ -120,8 +120,8 @@ To Do
 -----
 
     - Add more validation rules with time...
-    - Make more tests, while tests on rules are fairly etensive, the validator class itself lacks some tests...
-    - ~~Add support for i18n \o/~~ (as a newbie to python, this one was quite a pain :D)
+    - Make more tests on the validator class itself...
+
 
 
 
