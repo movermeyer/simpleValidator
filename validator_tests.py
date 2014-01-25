@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from validator import Validator
-import unittest, i18n
+import unittest
+import i18n
 
 class ValidatorTest(unittest.TestCase):
 

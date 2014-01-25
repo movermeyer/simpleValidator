@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-import re, socket, datetime
+import re
+import socket
+import datetime
 
 messages = {
     "required": u"{} is required",
