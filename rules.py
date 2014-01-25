@@ -4,30 +4,30 @@ import socket
 import datetime
 
 messages = {
-    "required": u"{} is required",
-    "email": u"{} must be a valid email",
+    "required": "{} is required",
+    "email": "{} must be a valid email",
     "min": { 
-        'string': u"{} must be more than {} characters", 
-        'numeric': u"{} must be higher than {}",
+        'string': "{} must be more than {} characters", 
+        'numeric': "{} must be higher than {}",
     },
     "max": {
-        'string': u"{} must be less than {} characters",
-        'numeric': u"{} must be lower than {}",
+        'string': "{} must be less than {} characters",
+        'numeric': "{} must be lower than {}",
     },
     "between":{
-        'string': u"{}'s length must be between {} and {} characters",
-        'numeric': u"{}'s value must be higher than {} and lower than {}",
+        'string': "{}'s length must be between {} and {} characters",
+        'numeric': "{}'s value must be higher than {} and lower than {}",
     },
-    "ip4": u"{} must be a valid ipv4 address",
-    "ip6": u"{} must be a valid ipv6 address",
-    "numeric": u"{} must be numerical",
-    "integer": u"{} must be an integer",
-    "posinteger": u"{} must be a positive integer",
-    "url": u"{} must be a valid url",
-    "alpha": u"{} must contain only alphabetical characters",
-    "alpha_num": u"{} must contain only alphabetical characters and/or numbers",
-    "alpha_dash": u"{} must contain only alphabetical characters or numbers or underscores and dashes",
-    "date": u"{} is not a valid date, the format must be {}",
+    "ip4": "{} must be a valid ipv4 address",
+    "ip6": "{} must be a valid ipv6 address",
+    "numeric": "{} must be numerical",
+    "integer": "{} must be an integer",
+    "posinteger": "{} must be a positive integer",
+    "url": "{} must be a valid url",
+    "alpha": "{} must contain only alphabetical characters",
+    "alpha_num": "{} must contain only alphabetical characters and/or numbers",
+    "alpha_dash": "{} must contain only alphabetical characters or numbers or underscores and dashes",
+    "date": "{} is not a valid date, the format must be {}",
 }
 
 
@@ -42,7 +42,7 @@ def required(value):
     return not len(str(value).strip()) == 0
 
 def email(value):
-    pattern = "^[a-z0-9]+([._-][a-z0-9]+)*@([a-z0-9]+([._-][a-z0-9]+))+$"
+    pattern = r'^[a-z0-9]+([._-][a-z0-9]+)*@([a-z0-9]+([._-][a-z0-9]+))+$'
     return re.match(pattern, str(value).strip()) is not None
 
 
@@ -146,15 +146,15 @@ def numeric(value):
 
 ### alpha, validates if value contains only alphabetical characters ###
 def alpha(value):
-    return re.match('^[a-zA-Z]+$', value) is not None
+    return re.match(r'^[a-zA-Z]+$', value) is not None
 
 ### alpha_num, validates if value contains alphabetical characters and numbers ###
 def alpha_num(value):
-    return re.match('^[a-zA-Z0-9]+$', value) is not None
+    return re.match(r'^[a-zA-Z0-9]+$', value) is not None
 
 ### alpha_dash, validates if value contains alphabetical characters, numbers and dashes ###
 def alpha_dash(value):
-    return re.match('^[a-zA-Z0-9][ A-Za-z0-9_-]*$', value) is not None
+    return re.match(r'^[a-zA-Z0-9][ A-Za-z0-9_-]*$', value) is not None
 
 ### integer, validates if value is an integer ###
 def integer(value):
