@@ -276,7 +276,7 @@ class ValidatorTest(unittest.TestCase):
         ### Switching back locale to English to avoid that other tests fail ! ###
         i18n.switch_language('en')
 
-    """
+    
     def test_email_locale_jp_fail(self):
         
         i18n.switch_language('ja')
@@ -289,7 +289,7 @@ class ValidatorTest(unittest.TestCase):
 
         ### Switching back locale to English to avoid that other tests fail ! ###
         i18n.switch_language('en')
-    """
+
 
 
 if __name__ == '__main__':
