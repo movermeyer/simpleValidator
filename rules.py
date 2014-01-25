@@ -4,12 +4,18 @@ import re, socket, datetime
 messages = {
     "required": u"{} is required",
     "email": u"{} must be a valid email",
-    "min": u"{} must be more than {} characters",
-    "mind": u"{} must be higher than {}",
-    "max": u"{} must be less than {} characters",
-    "maxd": u"{} must be lower than {}",
-    "between": u"{}'s length must be between {} and {} characters",
-    "betweend": u"{}'s value must be higher than {} and lower than {}",
+    "min": { 
+        'string': u"{} must be more than {} characters", 
+        'numeric': u"{} must be higher than {}",
+    },
+    "max": {
+        'string': u"{} must be less than {} characters",
+        'numeric': u"{} must be lower than {}",
+    },
+    "between":{
+        'string': u"{}'s length must be between {} and {} characters",
+        'numeric': u"{}'s value must be higher than {} and lower than {}",
+    },
     "ip4": u"{} must be a valid ipv4 address",
     "ip6": u"{} must be a valid ipv6 address",
     "numeric": u"{} must be numerical",

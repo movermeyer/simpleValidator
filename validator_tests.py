@@ -51,13 +51,13 @@ class ValidatorTest(unittest.TestCase):
             v.make(fields = {'test': '5char'}, rules = {'test': 'min:omagad'})
         except ValueError as e:
             self.assertRaisesRegexp(e, 'constraint is not a valid integer')
-        
+     
     def test_min_string_fail(self):
         v = Validator(fields = {'test': '5char'}, rules = {'test': 'min:6'})
 
         self.assertTrue(v.fails())
         self.assertTrue('test must be more than 6 characters' in v.errors())
-
+    
     def test_min_integer_fail(self):
         v = Validator(fields = {'test': 5}, rules = {'test': 'min:6'})
 
@@ -216,7 +216,7 @@ class ValidatorTest(unittest.TestCase):
         v = Validator()
         v.extend({'myrule': self.customRule})
 
-        v.make(fields = {'test': 5}, rules = {'test': 'myrule'}, messages = {'myruled' : '{0} is not equal to 1'})
+        v.make(fields = {'test': 5}, rules = {'test': 'myrule'}, messages = {'myrule' : '{0} is not equal to 1'})
 
         self.assertTrue(v.fails())
         self.assertTrue('test is not equal to 1' in v.errors())
@@ -262,7 +262,7 @@ class ValidatorTest(unittest.TestCase):
         self.assertFalse(v.fails())
         self.assertFalse(v.errors())
 
-
+    
     def test_email_locale_fr_fail(self):
         
         i18n.switch_language('fr')
@@ -289,7 +289,6 @@ class ValidatorTest(unittest.TestCase):
 
         ### Switching back locale to English to avoid that other tests fail ! ###
         i18n.switch_language('en')
-
 
 
 if __name__ == '__main__':

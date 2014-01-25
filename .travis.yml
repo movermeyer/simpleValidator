@@ -9,4 +9,5 @@ python:
 # command to run tests
 script:
   - python rules_tests.py
+  - python validator_class_tests.py
   - python validator_tests.py

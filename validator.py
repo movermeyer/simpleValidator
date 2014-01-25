@@ -27,19 +27,22 @@ class Validator:
         messages = kwargs.get('messages')
 
         if not isinstance(fields, dict):
-            raise ValueError('field data must be a dict')
+            raise TypeError('fields data must be a dict')
 
         if not isinstance(rules, dict):
-            raise ValueError('rules data must be a dict')
+            raise TypeError('rules data must be a dict')
 
         if messages is not None and not isinstance(messages, dict):
-            raise ValueError('custom error messages must be containend in a dict')
+            raise TypeError('custom error messages must be contained in a dict')
 
         self.fields = fields
         self.rules = rules 
 
         if messages:
             self.rulefactory.messages.update(messages)
+            self.messages_temp = messages
+        else:
+            self.messages_temp = None
 
         """ Routine to makesure that fields and rules and messages are consistent """
         self.verify_fields()
@@ -48,10 +51,14 @@ class Validator:
 
     def extend(self, customrule):
         if not isinstance(customrule, dict):
-            raise ValueError('custome rule must be a dict')
+            raise TypeError('custom rule must be a dict')
 
         for rule in customrule:
+            if not hasattr(customrule[rule], '__call__'):
+                raise TypeError('custom rule is not a callable')
+
             setattr(self.rulefactory, rule, customrule[rule])
+
 
     def __call_rule(self, rule, **kwargs):
         return getattr(self.rulefactory, rule)(**kwargs)
@@ -72,35 +79,41 @@ class Validator:
                     callback = self.__call_rule(rule = rulevalue[0], value = self.fields[field], constraint = rulevalue[1])
 
                 else:
-                    rulevalue = [rule, rule]
+                    rulevalue = [rule]
                     callback = self.__call_rule(rule = rule, value = self.fields[field])
 
                 if not callback:
 
-                    if self.rulefactory.is_number(self.fields[field]) and rulevalue[1]:
-                        errors.append(self.set_errors(rulevalue[0]+'d', field = field, constraint = rulevalue[1]))
-                    
-                    elif not self.rulefactory.is_number(self.fields[field]) and rulevalue[1]:
+                    if len(rulevalue) == 2:
                         errors.append(self.set_errors(rulevalue[0], field = field, constraint = rulevalue[1]))
-                    
                     else:
-                        errors.append(self.rulefactory.messages[rule] % field)
+                        errors.append(self.set_errors(rulevalue[0], field = field, constraint = ''))
+
                     failed_rules.append({field: rule})
 
         self.error_messages = errors
         self.error_rules = failed_rules
-        return errors
 
     def set_errors(self, rule, **kwargs):
         ### we need to fetch the most current reference to gettext for translations ###
         _ = i18n.defaultlang.gettext
 
-        if ',' in kwargs['constraint']:
-            boundaries = kwargs['constraint'].split(',')
-            return _(self.rulefactory.messages[rule]).format(kwargs['field'], boundaries[0], boundaries[1])
+        constraint = kwargs['constraint']
+        field = kwargs['field']
 
+        if isinstance(self.rulefactory.messages[rule], dict):
+            if self.rulefactory.is_number(self.fields[field]):
+                rule_text = self.rulefactory.messages[rule]['numeric']
+            else:
+                rule_text = self.rulefactory.messages[rule]['string']
+        else:
+            rule_text = self.rulefactory.messages[rule]
 
-        return _(self.rulefactory.messages[rule]).format(kwargs['field'], kwargs['constraint'])
+        if ',' in constraint:
+            boundaries = constraint.split(',')
+            return _(rule_text).format(field, boundaries[0], boundaries[1])
+
+        return _(rule_text).format(field, constraint)
 
     def fails(self):
         return len(self.error_messages) > 0
@@ -121,5 +134,14 @@ class Validator:
             if rule not in self.fields:
                 raise ValueError('fields do not correspond to rules')
 
-            #if self.messages is not None and rule not in self.messages:
-            #    raise ValueError('messages do not correspond to fields')
+        if self.messages_temp is not None:
+            error = 0
+            for d_rule in self.rules:
+                for rule in self.messages_temp:
+                    if rule not in self.rules[d_rule]:
+                        error += 1
+                    else:
+                        error = 0
+
+            if error > 0:
+                raise ValueError('custom validation messages do not correspond to rule list')
