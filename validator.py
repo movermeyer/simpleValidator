@@ -112,7 +112,7 @@ class Validator:
 
         if ',' in constraint:
             boundaries = constraint.split(',')
-            return _(rule_text).format(field, boundaries[0], boundaries[1])
+            return _(rule_text).format(field, *boundaries)
 
         return _(rule_text).format(field, constraint)
 
