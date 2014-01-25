@@ -1,27 +1,27 @@
-### A work in progress validation rules ###
-### rules strings are included in the file because it's convenient :D ###
+# -*- coding: utf-8 -*-
 import re, socket, datetime
 
 messages = {
-    "required": "{} is required",
-    "email": "{} must be a valid email",
-    "min": "{} must be more than {} characters",
-    "mind": "{} must be higher than {}",
-    "max": "{} must be less than {} characters",
-    "maxd": "{} must be lower than {}",
-    "between": "{}'s length must be between {} and {} characters",
-    "betweend": "{}'s value must be higher than {} and lower than {}",
-    "ip4": "{} must be a valid ipv4 address",
-    "ip6": "{} must be a valid ipv6 address",
-    "numeric": "{} must be numerical",
-    "integer": "{} must be an integer",
-    "posinteger": "{} must be a positive integer",
-    "url": "{} must be a valid url",
-    "alpha": "{} must contain only alphabetical characters",
-    "alpha_num": "{} must contain only alphabetical characters and/or numbers",
-    "alpha_dash": "{} must contain only alphabetical characters or numbers",
-    "date": "{} is not a valid date, the format must be {}",
+    "required": u"{} is required",
+    "email": u"{} must be a valid email",
+    "min": u"{} must be more than {} characters",
+    "mind": u"{} must be higher than {}",
+    "max": u"{} must be less than {} characters",
+    "maxd": u"{} must be lower than {}",
+    "between": u"{}'s length must be between {} and {} characters",
+    "betweend": u"{}'s value must be higher than {} and lower than {}",
+    "ip4": u"{} must be a valid ipv4 address",
+    "ip6": u"{} must be a valid ipv6 address",
+    "numeric": u"{} must be numerical",
+    "integer": u"{} must be an integer",
+    "posinteger": u"{} must be a positive integer",
+    "url": u"{} must be a valid url",
+    "alpha": u"{} must contain only alphabetical characters",
+    "alpha_num": u"{} must contain only alphabetical characters and/or numbers",
+    "alpha_dash": u"{} must contain only alphabetical characters or numbers or underscores and dashes",
+    "date": u"{} is not a valid date, the format must be {}",
 }
+
 
 def is_number(s):
     try:

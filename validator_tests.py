@@ -1,6 +1,7 @@
-from validator import Validator
-import unittest
+# -*- coding: utf-8 -*-
 
+from validator import Validator
+import unittest, i18n
 
 class ValidatorTest(unittest.TestCase):
 
@@ -254,12 +255,40 @@ class ValidatorTest(unittest.TestCase):
         self.assertFalse(v.fails())
         self.assertFalse(v.errors())
 
-    
+
     def test_integer_as_integer_pass(self):
         v = Validator(fields = {'test': 25}, rules = {'test': 'integer'})
 
         self.assertFalse(v.fails())
         self.assertFalse(v.errors())
+
+
+    def test_email_locale_fr_fail(self):
+        
+        i18n.switch_language('fr')
+
+        v = Validator(fields = {'test': 'bademail.com'}, rules = {'test': 'email'})
+
+        self.assertTrue(v.fails())
+
+        self.assertTrue('test doit etre un email valide' in v.errors())
+
+        ### Switching back locale to English to avoid that other tests fail ! ###
+        i18n.switch_language('en')
+
+
+    def test_email_locale_jp_fail(self):
+        
+        i18n.switch_language('ja')
+
+        v = Validator(fields = {'test': 'bademail.com'}, rules = {'test': 'email'})
+
+        self.assertTrue(v.fails())
+
+        self.assertTrue('testに正しい形式をご指定ください。' in v.errors())
+
+        ### Switching back locale to English to avoid that other tests fail ! ###
+        i18n.switch_language('en')
 
 
 if __name__ == '__main__':

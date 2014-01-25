@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
+
 """ 
     Simple Validator class with default validation rules, inspired by laravel
 
 """
-import rules as rulefactory
+import rules as rulefactory, i18n
 
 class Validator:
 
@@ -90,12 +92,15 @@ class Validator:
         return errors
 
     def set_errors(self, rule, **kwargs):
+        ### we need to fetch the most current reference to gettext for translations ###
+        _ = i18n.defaultlang.gettext
+
         if ',' in kwargs['constraint']:
             boundaries = kwargs['constraint'].split(',')
-            return self.rulefactory.messages[rule].format(kwargs['field'], boundaries[0], boundaries[1])
+            return _(self.rulefactory.messages[rule]).format(kwargs['field'], boundaries[0], boundaries[1])
 
 
-        return self.rulefactory.messages[rule].format(kwargs['field'], kwargs['constraint'])
+        return _(self.rulefactory.messages[rule]).format(kwargs['field'], kwargs['constraint'])
 
     def fails(self):
         return len(self.error_messages) > 0
