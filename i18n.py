@@ -18,8 +18,8 @@ DEFAULT_LANGUAGE = config.LOCALE
 #if lc:
 #    languages = [lc]
  
-defaultlang = gettext.translation(APP_NAME, LOCALE_DIR, languages=DEFAULT_LANGUAGE, fallback=False)
+defaultlang = gettext.translation(APP_NAME, LOCALE_DIR, languages=DEFAULT_LANGUAGE, fallback=True)
 
 def switch_language(lang):
     global defaultlang
-    defaultlang = gettext.translation(APP_NAME, LOCALE_DIR, languages=[lang], fallback=False)
+    defaultlang = gettext.translation(APP_NAME, LOCALE_DIR, languages=[lang], fallback=True)
