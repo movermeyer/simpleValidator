@@ -120,8 +120,6 @@ To Do
 -----
 
     - Add more validation rules with time...
-    - Make more tests on the validator class itself...
-
 
 
 
