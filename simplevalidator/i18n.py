@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
  
 import os
-import settings
+import simplevalidator.settings as settings
 import gettext
  
 # Change this variable to your app name!
@@ -9,7 +9,7 @@ import gettext
 #  @LOCALE_DIR@/@LANGUAGE@/LC_MESSAGES/@APP_NAME@.mo
 APP_NAME = "simpleValidator"
  
-LOCALE_DIR = os.path.abspath('lang') # .mo files will then be located in APP_Dir/i18n/LANGUAGECODE/LC_MESSAGES/
+LOCALE_DIR = path = os.path.join(os.path.dirname(__file__), 'lang') # .mo files will then be located in APP_Dir/i18n/LANGUAGECODE/LC_MESSAGES/
  
 DEFAULT_LANGUAGE = settings.LOCALE
 

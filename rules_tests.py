@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from rules import *
+from simplevalidator.rules import *
 import unittest
 
 
