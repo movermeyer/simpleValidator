@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from validator import Validator
+from simplevalidator import Validator
 import unittest
 import i18n
 

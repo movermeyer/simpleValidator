@@ -1,1 +1,1 @@
-from validator import Validator
+from simplevalidator import Validator

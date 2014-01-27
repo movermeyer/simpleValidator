@@ -1,4 +1,4 @@
-from validator import Validator
+from simplevalidator import Validator
 import unittest
 
 class ClassTest(unittest.TestCase):
