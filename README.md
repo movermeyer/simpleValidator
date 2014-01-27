@@ -120,6 +120,8 @@ To Do
 -----
 
     - Add more validation rules with time...
+    - Add support for file validation (mime type, file size etc...)
+    - Add support for json validation (through templates) 
 
 
 
