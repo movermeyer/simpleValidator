@@ -4,6 +4,9 @@
     Simple Validator class with default validation rules, inspired by laravel
 
 """
+
+__version__ = '0.0.5'
+
 from . import rules as rulefactory
 from . import i18n
 
