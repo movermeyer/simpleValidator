@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
  
 import os
-import simplevalidator.settings as settings
+import .settings as settings
 import gettext
  
 # Change this variable to your app name!

@@ -4,8 +4,8 @@
     Simple Validator class with default validation rules, inspired by laravel
 
 """
-import simplevalidator.rules as rulefactory
-import simplevalidator.i18n as i18n
+import .rules as rulefactory
+import .i18n as i18n
 
 class Validator:
 
