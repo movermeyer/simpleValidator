@@ -1,7 +1,7 @@
 simpleValidator
 ===============
 
-[![Build Status](https://travis-ci.org/markleent/simpleValidator.png?branch=master)](https://travis-ci.org/markleent/simpleValidator)
+[![Latest Version](https://pypip.in/v/simpleValidator/badge.png)](https://pypi.python.org/pypi/simpleValidator/) [![Build Status](https://travis-ci.org/markleent/simpleValidator.png?branch=master)](https://travis-ci.org/markleent/simpleValidator) [![License](https://pypip.in/license/simpleValidator/badge.png)](https://pypi.python.org/pypi/simpleValidator/) [![Downloads](https://pypip.in/d/simpleValidator/badge.png)](https://pypi.python.org/pypi/simpleValidator/)
 
 
 A small, extensible python 2 (and 3 compatible !) library to deal with web validations !
