@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
  
 import os
-import .settings as settings
+from . import settings
 import gettext
  
 # Change this variable to your app name!
