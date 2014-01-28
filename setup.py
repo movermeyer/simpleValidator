@@ -68,7 +68,6 @@ setup(
     url=url,
     license=license,
     description=description,
-    long_description = read('README.md'),
     author=author,
     author_email=author_email,
     packages=get_packages(package),
