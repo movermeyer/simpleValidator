@@ -28,6 +28,7 @@ Installing
         b. cd simpleValidator-*
         c. run python setup.py
 
+
 Use case:
 ---------
 
@@ -101,6 +102,35 @@ print(v.errors())
 
 ```
 
+i18n
+----
+
+simpleValidator supports i18n, through gettext, for now a list of 3 languages are available : English (en), French (fr), Japanese (ja)
+
+```python
+from simplevalidator import Validator, i18n
+
+i18n.switch_language('fr')
+
+fields = {'username': ''}
+rules = {'username': 'required'}
+
+v = Validator(fields = fields, rules = rules)
+
+print(v.errors())
+## > ['username est requis']
+
+
+
+i18n.switch_language('ja')
+
+v = Validator(fields = fields, rules = rules)
+
+print(v.errors())
+## > ['username est requis']
+['usernameは必ず指定してください。']
+```
+
 
 Rules List
 ==========
@@ -132,6 +162,7 @@ To Do
 -----
 
     - Add more validation rules with time...
+    - Add better translations for French 
     - Add support for file validation (mime type, file size etc...)
     - Add support for json validation (through templates) 
 
