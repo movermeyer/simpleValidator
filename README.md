@@ -127,8 +127,7 @@ i18n.switch_language('ja')
 v = Validator(fields = fields, rules = rules)
 
 print(v.errors())
-## > ['username est requis']
-['usernameは必ず指定してください。']
+## > ['usernameは必ず指定してください。']
 ```
 
 
