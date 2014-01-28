@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from simplevalidator import Validator
-import simplevalidator.i18n as i18n
+from __future__ import unicode_literals
+
+from simplevalidator import Validator, i18n
 import unittest
 
 

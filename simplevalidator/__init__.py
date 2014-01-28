@@ -5,7 +5,7 @@
 
 """
 
-__version__ = '0.0.5'
+__version__ = '0.0.5.3'
 
 from . import rules as rulefactory
 from . import i18n
@@ -100,7 +100,10 @@ class Validator:
 
     def set_errors(self, rule, **kwargs):
         ### we need to fetch the most current reference to gettext for translations ###
-        _ = i18n.defaultlang.gettext
+        try:
+            _ = i18n.defaultlang.ugettext
+        except AttributeError:
+            _ = i18n.defaultlang.gettext
 
         constraint = kwargs['constraint']
         field = kwargs['field']

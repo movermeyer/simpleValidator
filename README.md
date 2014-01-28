@@ -16,11 +16,23 @@ Where to use it ? in [Flask](https://github.com/mitsuhiko/flask) for example for
 
 N.B. : while i have years of experiences in php, i am mostly a newbie in python, this was a good idea to test on, and my very first OSS project as well :)
 
+Installing
+----------
+
+    1. pip install simpleValidator
+    2. git clone https://github.com/markleent/simpleValidator.git
+        a. cd simpleValidator
+        b. run python setup.py
+    3. wget https://github.com/markleent/simpleValidator/archive/master.zip (or download through your browser !)
+        a. unzip file
+        b. cd simpleValidator-*
+        c. run python setup.py
+
 Use case:
 ---------
 
 ```python
-from validator import Validator
+from simplevalidator import Validator
 
 my_items_to_test = {
     'name': 'myusername',
@@ -57,7 +69,7 @@ Custom Validation !
 simpleValidator is extensible at runtime ! you can add in your own validation rules and messages !
 
 ```python
-from validator import Validator
+from simplevalidator import Validator
 
 my_items_to_test = {
     'name': 'myusername',
