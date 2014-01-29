@@ -139,7 +139,7 @@ class ClassTest(unittest.TestCase):
     """
         I mean here that the validation fails, thus the method is called
     """
-    def test_method_extend_fail_pass(self):
+    def test_extend_fail_pass(self):
         messages = {'new_rule': '{} is less than 10 !!'}
         new_rule = {'new_rule': self.good_method}
         fields = {'cars': 5}
@@ -156,7 +156,7 @@ class ClassTest(unittest.TestCase):
     """
         Same test, but this time the validation passes totally
     """
-    def test_method_extend_pass_pass(self):
+    def test_extend_pass_pass(self):
         messages = {'new_rule': '{} is less than 10 !!'}
         new_rule = {'new_rule': self.good_method}
         fields = {'cars': 12}
