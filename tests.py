@@ -11,6 +11,52 @@ class ClassTest(unittest.TestCase):
     def setUp(self):
         pass
 
+    ### there is no verify for "pass", as the method itself doesn't return anything and just throw exceptions if things are wrong :)
+    def test_verify_rules_fields_fail(self):
+        v = Validator()
+
+        v.rules = {'myField': 'required'}
+        v.fields = {'myfield': 'Hello World'}
+
+        try:
+            v.verify_fields()
+        except ValueError as e:
+            self.assertRaisesRegexp(e, 'fields do not correspond to rules')
+
+    def test_verify_messages_fail(self):
+
+        v = Validator()
+
+        v.rules = {'myField': 'required'}
+        v.fields = {'myField': 'Hello World'}
+        v.messages_temp = {'requared': 'this thing is going to crash !!'}
+
+        try:
+            v.verify_fields()
+        except ValueError as e:
+            self.assertRaisesRegexp(e, 'custom validation messages do not correspond to rule list')
+
+
+
+    def test_method_failed_validation_pass(self):
+        fields = {'myField': 'itsa me, mario !'}
+        rules = {'myField': 'required'}
+
+        v = Validator(fields = fields, rules = rules)
+
+        self.assertFalse(v.failed())
+
+    def test_method_failed_validation_fail(self):
+        fields = {'myField': ''}
+        rules = {'myField': 'required|email'}
+
+        v = Validator(fields = fields, rules = rules)
+
+        ### v.failed contains a list of failed validations, and their respective fields
+        ### should print : [{u'myField': u'required'}, {u'myField': u'email'}]
+        self.assertTrue(v.failed())
+
+
 
     def test_malformed_field_argument_constructor(self):
         wrongfields = ''
@@ -139,7 +185,7 @@ class ClassTest(unittest.TestCase):
     """
         I mean here that the validation fails, thus the method is called
     """
-    def test_extend_fail_pass(self):
+    def test_method_extend_fail_pass(self):
         messages = {'new_rule': '{} is less than 10 !!'}
         new_rule = {'new_rule': self.good_method}
         fields = {'cars': 5}
@@ -156,7 +202,7 @@ class ClassTest(unittest.TestCase):
     """
         Same test, but this time the validation passes totally
     """
-    def test_extend_pass_pass(self):
+    def test_method_extend_pass_pass(self):
         messages = {'new_rule': '{} is less than 10 !!'}
         new_rule = {'new_rule': self.good_method}
         fields = {'cars': 12}
@@ -169,7 +215,6 @@ class ClassTest(unittest.TestCase):
 
         self.assertFalse(v.fails())
         self.assertFalse(v.errors())
-
 
 
     def good_method(self, value):
