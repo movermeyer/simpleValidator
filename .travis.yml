@@ -9,9 +9,9 @@ install:
 #  - "pip install -r requirements.txt"
 # command to run tests
 script:
-  -   coverage run --source=simplevalidator setup.py test
+  - coverage run --source=simplevalidator setup.py test
 after_success:
-  coveralls
+  - coveralls
 #  - python rules_tests.py
 #  - python validator_class_tests.py
 #  - python validator_tests.py
