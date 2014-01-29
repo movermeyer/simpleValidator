@@ -89,14 +89,18 @@ def between(value, constraint = None):
 
     try:
         constraints = constraint.split(',')
-    except TypeError:
-        raise TypeError('constraints are not a valid integer')
+    except AttributeError:
+        raise AttributeError('constraints must be written like so between:val1,val2')
+
 
     if len(constraints) < 2:
         raise ValueError('constraints are missing from the validation rule')
 
-    lower = float(constraints[0])
-    higher = float(constraints[1])
+    try:
+        lower = float(constraints[0])
+        higher = float(constraints[1])
+    except ValueError:
+        raise ValueError('constraints are not valid numbers')
     
     if is_number(value):
         return lower <= float(value) <= higher
@@ -107,13 +111,7 @@ def between(value, constraint = None):
 def ip4(value):
     try:
         socket.inet_pton(socket.AF_INET, value)
-    except AttributeError:
-        try:
-            socket.inet_aton(value)
-        except socket.error:
-            return False
-        return value.count('.') == 3
-    except socket.error:  # not a valid address
+    except socket.error:
         return False
 
     return True

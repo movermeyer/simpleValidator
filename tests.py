@@ -592,6 +592,33 @@ class RulesTest(unittest.TestCase):
         except ValueError as e:
             self.assertRaisesRegexp(e, 'constraints are missing from the validation rule')
 
+
+    def test_Between_malformed_constraint_integer_as_param(self):
+        try:
+            t = between('hah', 3)
+        except AttributeError as e:
+            self.assertRaisesRegexp(e, 'constraints must be written like so between:val1,val2')
+
+
+    def test_Between_malformed_constraint_one_string_parame(self):
+        try:
+            t = between('hah', '3')
+        except ValueError as e:
+            self.assertRaisesRegexp(e, 'constraints are missing from the validation rule')
+
+
+    def test_Between_malformed_constraint_one_int_one_string(self):
+        try:
+            t = between('hah', '3,a')
+        except ValueError as e:
+            self.assertRaisesRegexp(e, 'constraints are not valid numbers')
+
+    def test_Between_malformed_constraint_one_string_one_int(self):
+        try:
+            t = between('hah', 'b,5')
+        except ValueError as e:
+            self.assertRaisesRegexp(e, 'constraints are not valid numbers')
+
     def test_Between_string_pass(self):
         t = between('chars', '3,6')
 
@@ -614,6 +641,8 @@ class RulesTest(unittest.TestCase):
 
 
 
+
+
     def test_ipv4_malformed(self):
         t = ip4('ah.234.52.12')
 
@@ -628,8 +657,6 @@ class RulesTest(unittest.TestCase):
         t = ip4('192.168.1.55')
 
         self.assertTrue(t)
-
-
 
 
     def test_ipv6_malformed(self):
@@ -697,6 +724,8 @@ class RulesTest(unittest.TestCase):
         self.assertTrue(t)
 
 
+
+
     def test_posinteger_fail(self):
         t = posinteger(-2)
 
@@ -706,6 +735,11 @@ class RulesTest(unittest.TestCase):
         t = posinteger('22')
 
         self.assertTrue(t)
+
+    def test_posinteger_malformed(self):
+        t = posinteger('eww')
+
+        self.assertFalse(t)
 
 
 
