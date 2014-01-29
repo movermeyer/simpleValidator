@@ -1,7 +1,7 @@
 simpleValidator
 ===============
 
-[![Latest Version](https://pypip.in/v/simpleValidator/badge.png)](https://pypi.python.org/pypi/simpleValidator/) [![Build Status](https://travis-ci.org/markleent/simpleValidator.png?branch=master)](https://travis-ci.org/markleent/simpleValidator) [![License](https://pypip.in/license/simpleValidator/badge.png)](https://pypi.python.org/pypi/simpleValidator/) [![Downloads](https://pypip.in/d/simpleValidator/badge.png)](https://pypi.python.org/pypi/simpleValidator/)
+[![PyPI version](https://badge.fury.io/py/simpleValidator.png)](http://badge.fury.io/py/simpleValidator) [![Build Status](https://travis-ci.org/markleent/simpleValidator.png?branch=master)](https://travis-ci.org/markleent/simpleValidator)
 
 
 A small, extensible python 2 (and 3 compatible !) library to deal with web validations !
@@ -161,7 +161,6 @@ To Do
 -----
 
     - Add more validation rules with time...
-    - Add better translations for French 
     - Add support for file validation (mime type, file size etc...)
     - Add support for json validation (through templates) 
 
@@ -172,3 +171,10 @@ Is it UnitTested ?
 ------------------
 
 Of course ! please check rules_tests.py and validator_tests.py for tests examples. Simply run them with python rules_tests.py or python validator_tests.py
+
+
+
+License
+_______
+
+Released under a ([MIT](LICENSE)) license.
