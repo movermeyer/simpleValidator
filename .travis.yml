@@ -3,11 +3,15 @@ python:
   - "2.7"
   - "3.3"
 # command to install dependencies
-#install:
+install:
+  - "pip install coveralls"
 #  - "pip install ."
 #  - "pip install -r requirements.txt"
 # command to run tests
 script:
-  - python rules_tests.py
-  - python validator_class_tests.py
-  - python validator_tests.py
+  -   coverage run --source=simplevalidator setup.py test
+after_success:
+  coveralls
+#  - python rules_tests.py
+#  - python validator_class_tests.py
+#  - python validator_tests.py

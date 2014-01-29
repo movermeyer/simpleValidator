@@ -170,7 +170,10 @@ To Do
 Is it UnitTested ?
 ------------------
 
-Of course ! please check rules_tests.py and validator_tests.py for tests examples. Simply run them with python rules_tests.py or python validator_tests.py
+Of course ! please check rules_tests.py, validator_tests.py and validator_class_tests.py for tests examples. Additionally all files where merged for conveniance in one file that can be either run
+
+    1. python setup.py test
+    2. python tests.py
 
 
 
