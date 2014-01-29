@@ -274,7 +274,7 @@ class ValidatorTest(unittest.TestCase):
 
         self.assertTrue(v.fails())
 
-        self.assertTrue('test doit etre un email valide' in v.errors())
+        self.assertTrue('test doit être un email valide' in v.errors())
 
         ### Switching back locale to English to avoid that other tests fail ! ###
         i18n.switch_language('en')
