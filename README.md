@@ -1,7 +1,7 @@
 simpleValidator
 ===============
 
-[![PyPI version](https://badge.fury.io/py/simpleValidator.png)](http://badge.fury.io/py/simpleValidator) [![Build Status](https://travis-ci.org/markleent/simpleValidator.png?branch=master)](https://travis-ci.org/markleent/simpleValidator)
+[![PyPI version](https://badge.fury.io/py/simpleValidator.png)](http://badge.fury.io/py/simpleValidator) [![Build Status](https://travis-ci.org/markleent/simpleValidator.png?branch=master)](https://travis-ci.org/markleent/simpleValidator) [![Coverage Status](https://coveralls.io/repos/markleent/simpleValidator/badge.png?branch=master)](https://coveralls.io/r/markleent/simpleValidator?branch=master)
 
 
 A small, extensible python 2 (and 3 compatible !) library to deal with web validations !
