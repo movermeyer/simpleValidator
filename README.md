@@ -1,7 +1,7 @@
 simpleValidator
 ===============
 
-[![PyPI version](https://badge.fury.io/py/simpleValidator.png)](http://badge.fury.io/py/simpleValidator) [![Build Status](https://travis-ci.org/markleent/simpleValidator.png?branch=master)](https://travis-ci.org/markleent/simpleValidator) [![Coverage Status](https://coveralls.io/repos/markleent/simpleValidator/badge.png?branch=master)](https://coveralls.io/r/markleent/simpleValidator?branch=master)
+[![PyPI version](https://badge.fury.io/py/simpleValidator.png)](http://badge.fury.io/py/simpleValidator) [![Build Status](https://travis-ci.org/markleent/simpleValidator.png?branch=master)](https://travis-ci.org/markleent/simpleValidator) [![Coverage Status](https://coveralls.io/repos/markleent/simpleValidator/badge.png?branch=master)](https://coveralls.io/r/markleent/simpleValidator?branch=master) [![Downloads](https://pypip.in/d/simpleValidator/badge.png)](https://pypi.python.org/pypi/simpleValidator/) [![License](https://pypip.in/license/simpleValidator/badge.png)](https://pypi.python.org/pypi/simpleValidator/)
 
 
 A small, extensible python 2 (and 3 compatible !) library to deal with web validations !
@@ -170,7 +170,7 @@ To Do
 Is it UnitTested ?
 ------------------
 
-Of course ! please check rules_tests.py, validator_tests.py and validator_class_tests.py for tests examples. Additionally all files where merged for conveniance in one file that can be either run
+All tests files where merged for conveniance in one file that can be either run :
 
     1. python setup.py test
     2. python tests.py
