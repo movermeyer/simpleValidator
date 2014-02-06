@@ -138,8 +138,13 @@ class Validator:
         constraint = kwargs['constraint']
         field = kwargs['field']
 
+        try:
+            field_value = self.fields[field]
+        except AttributeError:
+            field_value = field
+
         if isinstance(self.rulefactory.messages[rule], dict):
-            if self.rulefactory.is_number(self.fields[field]):
+            if self.rulefactory.is_number(field_value):
                 rule_text = self.rulefactory.messages[rule]['numeric']
             else:
                 rule_text = self.rulefactory.messages[rule]['string']
