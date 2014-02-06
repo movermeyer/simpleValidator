@@ -177,7 +177,8 @@ All tests files where merged for conveniance in one file that can be either run 
 
 
 
+
 License
-_______
+-------
 
 Released under a ([MIT](LICENSE)) license.

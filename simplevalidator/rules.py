@@ -2,6 +2,7 @@
 import re
 import socket
 import datetime
+import json
 
 messages = {
     "required": "{} is required",
@@ -113,7 +114,6 @@ def ip4(value):
         socket.inet_pton(socket.AF_INET, value)
     except socket.error:
         return False
-
     return True
 
 ### ip6, validates if value is a real ipv6 address ###
@@ -172,7 +172,7 @@ def posinteger(value):
 
     return int(value) > 0
 
-### date, validates a date against a format ###
+### date, validates a date against a format ex: %Y-%m-%d ###
 def date(value, constraint):
     try:
         datetime.datetime.strptime(value, constraint)
@@ -181,3 +181,15 @@ def date(value, constraint):
 
     return True
 
+### check if string is valid json ###
+def is_json(value):
+    try: 
+        json.loads(value)
+    except ValueError:
+        return False
+    return True
+
+
+### check if string valid json according to a schema ###
+def json_schema(value, constraint):
+    pass

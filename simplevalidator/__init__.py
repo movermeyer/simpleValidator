@@ -50,7 +50,7 @@ class Validator:
 
         """ Routine to makesure that fields and rules and messages are consistent """
         self.verify_fields()
-        self.validate()
+        self.__validate()
 
 
     def extend(self, customrule):
@@ -67,7 +67,37 @@ class Validator:
     def __call_rule(self, rule, **kwargs):
         return getattr(self.rulefactory, rule)(**kwargs)
 
-    def validate(self):
+
+    def validate(self, what, how):
+        errors = []
+        failed_rules = []
+
+        rulelist = how.split('|')
+
+        for rule in rulelist:
+
+            if ":" in rule:
+                rulevalue = rule.split(":")
+                callback = self.__call_rule(rule = rulevalue[0], value = what, constraint = rulevalue[1])
+
+            else:
+                rulevalue = [rule]
+                callback = self.__call_rule(rule = rule, value = what)
+
+            if not callback:
+
+                if len(rulevalue) == 2:
+                    errors.append(self.set_errors(rulevalue[0], field = what, constraint = rulevalue[1]))
+                else:
+                    errors.append(self.set_errors(rulevalue[0], field = what, constraint = ''))
+
+                failed_rules.append({what: rule})
+
+        self.error_messages = errors
+        self.error_rules = failed_rules
+
+
+    def __validate(self):
         errors = []
         failed_rules = []
         

@@ -226,6 +226,25 @@ class ValidatorTest(unittest.TestCase):
     def setUp(self):
         pass
 
+
+    def test_direct_validate_fail(self):
+        v = Validator()
+
+        v.validate('gibberish', 'url')
+
+        self.assertTrue(v.fails())
+        self.assertTrue('gibberish must be a valid url' in v.errors())
+
+
+    def test_direct_validate_pass(self):
+        v = Validator()
+
+        v.validate('http://google.com', 'url')
+
+        self.assertFalse(v.fails())
+        self.assertFalse(v.errors())
+
+
     def test_required_empty(self):
         v = Validator(fields = {'test': ''}, rules = {'test': 'required'})
 
@@ -507,6 +526,17 @@ class ValidatorTest(unittest.TestCase):
 
 ### Rules unit tests
 class RulesTest(unittest.TestCase):
+
+    def test_Json_fail(self):
+        t = is_json('')
+
+        self.assertFalse(t)
+
+    def test_json_pass(self):
+        t = is_json('{"car": "blue"}')
+
+        self.assertTrue(t)
+
 
     def test_Required_missing_fail(self):
         t = required('')
