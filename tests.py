@@ -226,6 +226,13 @@ class ValidatorTest(unittest.TestCase):
     def setUp(self):
         pass
 
+    def test_direct_validate_multiple_fail(self):
+        v = Validator()
+
+        v.validate(22, 'min:43')
+
+        self.assertTrue(v.fails())
+        self.assertTrue('22 must higher than 43' in v.errors())
 
     def test_direct_validate_fail(self):
         v = Validator()
