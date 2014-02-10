@@ -40,11 +40,14 @@ def is_number(s):
         return False
 
 def required(value):
-    return not len(str(value).strip()) == 0
+    if is_number(value):
+        return True
+
+    return not len(u''.join(value).encode('utf-8').strip()) == 0
 
 def email(value):
     pattern = r'^[a-z0-9]+([._-][a-z0-9]+)*@([a-z0-9]+([._-][a-z0-9]+))+$'
-    return re.match(pattern, str(value).strip()) is not None
+    return re.match(pattern, u''.join(value).encode('utf-8').strip()) is not None
 
 
 ### min, validates if a string size is higher than the max constraint ###
