@@ -545,6 +545,11 @@ class RulesTest(unittest.TestCase):
         self.assertTrue(t)
 
 
+    def test_Required_utf8_encoded_pass(self):
+        t = required('Will you take a cup of Café with your biscuits ?')
+
+        self.assertTrue(t)
+
     def test_Required_missing_fail(self):
         t = required('')
 
@@ -578,6 +583,12 @@ class RulesTest(unittest.TestCase):
 
         self.assertTrue(t)
 
+
+    def test_Min_string_utf8_pass(self):
+        t = min('Café', 3)
+
+        self.assertTrue(t)
+
     def test_Min_string_fail(self):
         t = min('chars', 6)
 
@@ -603,6 +614,16 @@ class RulesTest(unittest.TestCase):
 
     def test_Max_string_fail(self):
         t = max('chars', 3)
+
+        self.assertFalse(t)
+
+    def test_Max_string_utf8_pass(self):
+        t = max('Café', 5)
+
+        self.assertTrue(t)
+
+    def test_Max_string_utf8_fail(self):
+        t = max('Café', 3)
 
         self.assertFalse(t)
 
@@ -658,6 +679,12 @@ class RulesTest(unittest.TestCase):
 
     def test_Between_string_pass(self):
         t = between('chars', '3,6')
+
+        self.assertTrue(t)
+
+
+    def test_Between_string_utf8_encoded_pass(self):
+        t = between('Café', '3,6')
 
         self.assertTrue(t)
 

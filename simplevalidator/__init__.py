@@ -5,7 +5,7 @@
 
 """
 
-__version__ = '0.0.5.9'
+__version__ = '0.0.6.0'
 
 from . import rules as rulefactory
 from . import i18n
