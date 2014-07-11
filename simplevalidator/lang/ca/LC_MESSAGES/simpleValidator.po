@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: simpleValidator\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-25 01:17+0400\n"
+"PO-Revision-Date: 2014-07-11 09:38+0100\n"
+"Last-Translator: Alexandre <abusquets@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ca\n"
+
+msgid "{} is required"
+msgstr "{} és obligatori"
+
+msgid "{} must be a valid email"
+msgstr "{} cal que sigui una adreça de correu electrònic vàlida"
+
+msgid "{} must be more than {} characters"
+msgstr "{} cal que tingui més de {} caràcters"
+
+msgid "{} must be higher than {}"
+msgstr "{} cal que sigui més gran que {}"
+
+msgid "{} must be less than {} characters"
+msgstr "{} cal que tingui menys de {} caràcters"
+
+msgid "{} must be lower than {}"
+msgstr "{} cal que sigui més petit que {}"
+
+msgid "{}'s length must be between {} and {} characters"
+msgstr "{} cal que tingui una llargada entre {} i {} caràcters"
+
+msgid "{}'s value must be higher than {} and lower than {}"
+msgstr "{} cal que el valor sigui més gran que {} i més petit que {}"
+
+msgid "{} must be a valid ipv4 address"
+msgstr "{} cal que sigui una adreça ipv4 vàlida"
+
+msgid "{} must be a valid ipv6 address"
+msgstr "{} cal que sigui una adreça ipv6 vàlida"
+
+msgid "{} must be numerical"
+msgstr "{} cal que sigui un número"
+
+msgid "{} must be an integer"
+msgstr "{} cal que sigui un número enter"
+
+msgid "{} must be a positive integer"
+msgstr "{} cal que sigui un número enter positiu"
+
+msgid "{} must be a valid url"
+msgstr "{} cal que sigui una adreça URL vàlida"
+
+msgid "{} must contain only alphabetical characters"
+msgstr "{} només pot contenir caràcters de l'alfabet"
+
+msgid "{} must contain only alphabetical characters and/or numbers"
+msgstr "{} només pot contenir caràcters de l'alfabet i números"
+
+msgid ""
+"{} must contain only alphabetical characters or numbers or underscores and "
+"dashes"
+msgstr "{} només pot contenir caràcters de l'alfabet, números o guions"
+
+msgid "{} is not a valid date, the format must be {}"
+msgstr "{} no és una data vàlida, el format cal que sigui {}"
